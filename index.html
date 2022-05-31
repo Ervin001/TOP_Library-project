@@ -31,8 +31,28 @@
             </svg>
             <div class="logo"><h1>The Library</h1></div>
           </div>
-          <form action=""></form>
-          <button></button>
+          <form id="book-info">
+            <div class="first-input inp">
+              <label for="book-title">Title of Book</label>
+              <input type="text" name="book-title" id="book-title" />
+            </div>
+
+            <div class="second-input inp">
+              <label for="name-of-author">Name of Author</label>
+              <input type="text" name="name-of-author" id="name-of-author" />
+            </div>
+
+            <div class="third-input inp">
+              <label for="page-number">Number of Pages</label>
+              <input type="tel" name="page-number" id="page-number" />
+            </div>
+
+            <div class="fourth-input inp">
+              <label for="status">Read?</label>
+              <input type="checkbox" name="status" />
+            </div>
+          </form>
+          <button type="submit" form="book-info">Submit</button>
         </div>
       </div>
       <div class="library-container">

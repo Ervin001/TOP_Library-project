@@ -28,6 +28,20 @@
   margin-left: 15px;
 }
 
+#book-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.inp {
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  flex: 0 1 auto;
+}
+
 .library-svg {
   margin-top: 20px;
 }
@@ -63,7 +77,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: rgb(48, 48, 48);
 }
 
 .title {
