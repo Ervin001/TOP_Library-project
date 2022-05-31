@@ -1,6 +1,8 @@
 :root {
   --sidebar-color: #4c6ef5;
   --books-container-color: #ffffff;
+  --selected-card-color: rgb(124 107 143);
+  --border-radius: 5px;
 }
 
 * {
@@ -13,16 +15,29 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
   font-family: 'Inter', sans-serif;
-
+  background-image: linear-gradient(rgb(147 118 165), rgb(65 69 117));
   height: 100vh;
 }
 
 .side-bar {
-  background-color: var(--sidebar-color);
+}
+
+.side-bar-container {
+  background-image: linear-gradient(rgb(156 132 176), rgb(94 95 139));
+  border-radius: var(--border-radius);
+  margin-left: 15px;
+}
+
+.library-svg {
+  margin-top: 20px;
+}
+
+.logo {
+  margin-top: 20px;
 }
 
 .library-container {
-  background-color: var(--books-container-color);
+  /* background-color: var(--books-container-color); */
   display: grid;
   grid-template-rows: repeat(2, min(200px, 50%));
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -30,9 +45,25 @@
   margin: 20px 20px;
 }
 
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 20px;
+  color: #fff;
+}
+
 .card {
   box-shadow: 0px 2px 8px 0px #444;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
+  background-color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(48, 48, 48);
 }
 
 .title {
