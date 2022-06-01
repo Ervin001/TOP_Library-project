@@ -26,11 +26,23 @@
   background-image: linear-gradient(rgb(156 132 176), rgb(94 95 139));
   border-radius: var(--border-radius);
   margin-left: 15px;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+button {
+  align-self: center;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 10px;
 }
 
 #book-info {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .inp {
