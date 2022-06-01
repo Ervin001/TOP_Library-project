@@ -20,16 +20,18 @@
 }
 
 .side-bar {
+  display: flex;
 }
 
 .side-bar-container {
   background-image: linear-gradient(rgb(156 132 176), rgb(94 95 139));
   border-radius: var(--border-radius);
   margin-left: 15px;
-  height: 60vh;
+  height: 540px;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 70px;
+  margin-top: 20px;
 }
 
 button {
@@ -43,15 +45,48 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  gap: 40px;
+
+  color: #fff;
 }
 
 .inp {
   display: flex;
   justify-content: space-between;
+  gap: 2px;
+  font-size: 1rem;
+  flex-direction: column;
+  padding: 0 10px;
+}
+
+.inp > input {
+  margin-bottom: 5px;
 }
 
 input {
-  flex: 0 1 auto;
+  flex-grow: 0;
+  align-self: flex-start;
+  border-radius: var(--border-radius);
+  border: none;
+  box-shadow: -1px 10px 10px 2px rgb(94 95 139);
+  padding-left: 8px;
+  font-size: 0.8rem;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+}
+
+.fourth-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fourth-input > input {
+  align-self: stretch;
+  margin-left: 5px;
 }
 
 .library-svg {
@@ -76,7 +111,9 @@ input {
   justify-content: center;
   align-items: center;
 
+  margin: 0 20px;
   margin-top: 20px;
+
   color: #fff;
 }
 
@@ -84,6 +121,7 @@ input {
   box-shadow: 0px 2px 8px 0px #444;
   border-radius: var(--border-radius);
   background-color: #fff;
+  color: rgb(73, 74, 113);
 
   display: flex;
   flex-direction: column;
