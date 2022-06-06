@@ -28,11 +28,28 @@ function inputsData() {
   const title = document.getElementById('book-title').value;
   const author = document.getElementById('name-of-author').value;
   const pages = document.getElementById('page-number').value;
-  const read = document.getElementById('read-status').checked;
+  let read = document.getElementById('read-status').checked;
 
-  return new Book(title, author, pages, read);
+  return new Book(title, author, pages, read === true ? 'Read' : 'Not Read');
 }
 const library = new Library();
+
+// Remove form data
+function removeInputData() {
+  let title = document.getElementById('book-title').value;
+  let author = document.getElementById('name-of-author').value;
+  let pages = document.getElementById('page-number').value;
+  let read = document.getElementById('read-status').checked;
+
+  title.value = '';
+}
+
+// Function for destructuring a book obj
+const destructureBookObj = function (bookObj) {
+  // console.log(bookObj);
+  const { title, author, pages, read } = bookObj;
+  return title, author, pages, read;
+};
 
 // Display
 const updateDisplay = function (title, author, pageNumbers, read) {
@@ -63,18 +80,16 @@ const individualBook = function (arrayOfBooks) {
   }
 };
 
-const takeOutBookInfo = function (bookObj) {
+const takeOutBookInfoAddToDisplayFunc = function (bookObj) {
   const { title, author, pages, read } = bookObj;
-  return title, author, pages, read;
+  updateDisplay(title, author, pages, read);
 };
 
 formSubmitEl.addEventListener('click', (e) => {
   e.preventDefault();
   library.addBookToLibrary(inputsData());
-  updateDisplay(takeOutBookInfo(inputsData()));
-  console.log(inputsData());
-
-  persistBooks();
+  takeOutBookInfoAddToDisplayFunc(inputsData());
+  removeInputData();
 });
 
 const init = function () {
