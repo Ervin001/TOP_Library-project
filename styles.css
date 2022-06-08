@@ -140,6 +140,7 @@ input {
   font-weight: 600;
   flex: 0 0 auto;
   align-self: center;
+  padding: 0 10px;
 }
 
 .info {

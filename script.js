@@ -1,6 +1,10 @@
 'use strict';
 const formSubmitEl = document.querySelector('.submit-button');
 const containerEl = document.querySelector('.library-container');
+let titleEl = document.getElementById('book-title');
+let authorEl = document.getElementById('name-of-author');
+let pagesEl = document.getElementById('page-number');
+let readEl = document.getElementById('read-status');
 
 function Book(title, author, pages, read) {
   // the constructor...
@@ -16,12 +20,18 @@ const Library = function () {
     this.books.push(book);
     persistBooks(book);
   };
+  this.addAttribute = function () {
+    let cardDataEl = document.querySelectorAll('.card');
+    for (let i = 0; i < this.books.length; i++) {
+      cardDataEl[i].dataset.id = `${i}`;
+    }
+  };
 };
 
 // localStorage
-const persistBooks = function (book) {
+function persistBooks(book) {
   localStorage.setItem('books', JSON.stringify(library.books));
-};
+}
 
 function inputsData() {
   //DOM Elements
@@ -36,12 +46,10 @@ const library = new Library();
 
 // Remove form data
 function removeInputData() {
-  let title = document.getElementById('book-title').value;
-  let author = document.getElementById('name-of-author').value;
-  let pages = document.getElementById('page-number').value;
-  let read = document.getElementById('read-status').checked;
-
-  title.value = '';
+  titleEl.value = '';
+  authorEl.value = '';
+  pagesEl.value = '';
+  readEl.checked = false;
 }
 
 // Function for destructuring a book obj
@@ -65,6 +73,19 @@ const updateDisplay = function (title, author, pageNumbers, read) {
   <div class="name-of-author info">${author}</div>
   <div class="number-of-pages info">${pageNumbers}</div>
   <div class="status info">${read}</div>
+<svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="#494a6e"
+            viewBox="0 0 256 256"
+            class="trash"
+          >
+            <rect width="256" height="256" fill="none"></rect>
+            <path
+              d="M216,48H176V40a24.1,24.1,0,0,0-24-24H104A24.1,24.1,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM112,168a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm0-120H96V40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8Z"
+            ></path>
+          </svg>
 </div>
 `;
 
@@ -85,19 +106,27 @@ const takeOutBookInfoAddToDisplayFunc = function (bookObj) {
   updateDisplay(title, author, pages, read);
 };
 
+// Submit form
 formSubmitEl.addEventListener('click', (e) => {
-  e.preventDefault();
-  library.addBookToLibrary(inputsData());
-  takeOutBookInfoAddToDisplayFunc(inputsData());
-  removeInputData();
+  if (titleEl.value !== '' && authorEl.value !== '') {
+    e.preventDefault();
+
+    library.addBookToLibrary(inputsData());
+
+    // Add id here
+
+    takeOutBookInfoAddToDisplayFunc(inputsData());
+    library.addAttribute();
+    removeInputData();
+  }
 });
 
-const init = function () {
+function init() {
   const storage = localStorage.getItem('books');
   if (storage) {
     library.books = JSON.parse(storage);
   }
   individualBook(library.books);
-};
+}
 
 init();
