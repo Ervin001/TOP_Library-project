@@ -153,3 +153,7 @@ input {
 .card > svg {
   flex: 0 0 auto;
 }
+
+.trash {
+  margin-top: 10px;
+}

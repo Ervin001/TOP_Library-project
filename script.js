@@ -54,7 +54,6 @@ function removeInputData() {
 
 // Function for destructuring a book obj
 const destructureBookObj = function (bookObj) {
-  // console.log(bookObj);
   const { title, author, pages, read } = bookObj;
   return title, author, pages, read;
 };
@@ -73,25 +72,21 @@ const updateDisplay = function (title, author, pageNumbers, read) {
   <div class="name-of-author info">${author}</div>
   <div class="number-of-pages info">${pageNumbers}</div>
   <div class="status info">${read}</div>
-<svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="#494a6e"
-            viewBox="0 0 256 256"
-            class="trash"
-          >
-            <rect width="256" height="256" fill="none"></rect>
-            <path
-              d="M216,48H176V40a24.1,24.1,0,0,0-24-24H104A24.1,24.1,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM112,168a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm0-120H96V40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8Z"
-            ></path>
-          </svg>
+  <div class="trash">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#494a6e" viewBox="0 0 256 256">
+      <rect width="256" height="256" fill="none"></rect>
+      <path
+      d="M216,48H176V40a24.1,24.1,0,0,0-24-24H104A24.1,24.1,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM112,168a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm0-120H96V40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8Z"
+      ></path>
+      </svg>
+  </div>
 </div>
 `;
 
   containerEl.insertAdjacentHTML('beforeend', card);
 };
 
+// Add attribute area
 const individualBook = function (arrayOfBooks) {
   const booksArray = arrayOfBooks;
 
@@ -127,6 +122,31 @@ function init() {
     library.books = JSON.parse(storage);
   }
   individualBook(library.books);
+  library.addAttribute();
 }
 
 init();
+
+const trashEl = document.querySelectorAll('.trash');
+trashEl.forEach((trash) =>
+  trash.addEventListener('click', function (e) {
+    const target = e.target;
+
+    if (library.books.length === 1) {
+      this.parentNode.remove();
+    }
+    const elPosition = this.parentElement.dataset.id;
+
+    const indexedPosition = library.books.indexOf(library.books[elPosition]);
+
+    library.books.splice(indexedPosition, 1);
+    console.log(indexedPosition);
+    // e.stopPropagation();
+
+    if (this.classList.contains('trash')) {
+      this.parentNode.remove();
+    }
+  })
+);
+
+console.log(library.books);
