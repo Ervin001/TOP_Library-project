@@ -148,5 +148,3 @@ trashEl.forEach((trash) =>
     }
   })
 );
-
-console.log(library.books);
