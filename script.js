@@ -16,11 +16,40 @@ function Book(title, author, pages, read) {
 
 const Library = function () {
   this.books = [];
-  this.addBookToLibrary = function () {};
+  this.addBookToLibrary = function () {
+    this.books.push(this.newBookInstance());
+  };
+  this.newBookInstance = function () {
+    const [title, author, pages, read] = retrieveInputs();
+    return new Book(title, author, pages, read);
+  };
   this.deleteBook = function () {};
   this.updateDisplay = function () {};
   this.deleteAllBooks = function () {};
 };
+
+const library = new Library();
+// inputs
+
+let title = document.getElementById('book-title');
+let author = document.getElementById('name-of-author');
+let pages = document.getElementById('page-number');
+let read = document.querySelector('#read-status');
+
+const retrieveInputs = function () {
+  title = title.value;
+  author = author.value;
+  pages = pages.value;
+  read = read.checked;
+  return [title, author, pages, read];
+};
+
+formSubmitEl.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  library.addBookToLibrary();
+  console.log(library.books);
+});
 
 // localStorage
 // function persistBooks(book) {
