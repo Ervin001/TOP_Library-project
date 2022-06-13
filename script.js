@@ -33,7 +33,9 @@ const Library = function () {
   this.deleteBook = function () {};
   this.updateDisplay = function () {};
   this.deleteAllBooks = function () {};
-  this.clearDisplay = function () {};
+  this.clearDisplay = function () {
+    containerEl.childNodes.remove;
+  };
   this.updateDisplay = function (array) {
     array.forEach((e) => {
       const card = `
