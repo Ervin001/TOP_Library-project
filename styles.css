@@ -161,3 +161,6 @@ input {
 .trash {
   margin-top: 10px;
 }
+.trash:hover {
+  cursor: pointer;
+}
