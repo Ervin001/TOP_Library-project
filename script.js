@@ -33,8 +33,10 @@ const Library = function () {
   this.deleteBook = function () {};
   this.updateDisplay = function () {};
   this.deleteAllBooks = function () {};
-  this.clearDisplay = function () {
-    containerEl.childNodes.remove;
+  this.clearDisplay = function (parent) {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
   };
   this.updateDisplay = function (array) {
     array.forEach((e) => {
@@ -76,7 +78,7 @@ formSubmitEl.addEventListener('click', (e) => {
 
   if (title.value !== '' && author.value !== '' && pages.value !== '') {
     library.addBookToLibrary();
-    library.clearDisplay();
+    if (library.books.length > 0) library.clearDisplay(containerEl);
     library.updateDisplay(library.books);
   }
 });
