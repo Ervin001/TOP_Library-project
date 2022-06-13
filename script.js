@@ -95,6 +95,7 @@ function init() {
   if (storage) {
     library.books = JSON.parse(storage);
   }
+  library.updateDisplay(library.books);
 }
 
 init();
