@@ -43,8 +43,20 @@ const Library = function () {
 
   this.clearInputData = function () {};
   this.deleteBook = function () {
-    //   const elPosition = this.parentElement.dataset.id;
-    //   const indexedPosition = library.books.indexOf(library.books[elPosition]);
+    const cardsEl = document.querySelectorAll('.card');
+    const trashEl = document.querySelectorAll('.trash');
+    console.log(trashEl);
+    // const elPosition = this.parentElement.dataset.id;
+    // const indexedPosition = library.books.indexOf(library.books[elPosition]);
+
+    // cardsEl.forEach((e) => console.log(e.dataset.id));
+    cardsEl.forEach((card, i) =>
+      card.addEventListener('click', (e) => {
+        console.log(e.target);
+        console.log(trashEl[i].className);
+        // if (e.target === trashEl[i].className)
+      })
+    );
   };
   this.deleteAllBooks = function () {};
   this.clearDisplay = function (parent) {
@@ -97,6 +109,7 @@ formSubmitEl.addEventListener('click', (e) => {
     library.updateDisplay(library.books);
     library.persistBook();
     library.addAttribute();
+    library.deleteBook();
   }
 });
 
