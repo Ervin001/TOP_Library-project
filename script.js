@@ -28,7 +28,15 @@ const Library = function () {
     localStorage.setItem('books', JSON.stringify(library.books));
   };
 
-  this.addAttribute = function () {};
+  this.addAttribute = function () {
+    //   let cardDataEl = document.querySelectorAll('.card');
+    //   for (let i = 0; i < this.books.length; i++) {
+    //     cardDataEl[i].dataset.id = `${i}`;
+    //   }
+    // };
+    //   const elPosition = this.parentElement.dataset.id;
+    //   const indexedPosition = library.books.indexOf(library.books[elPosition]);
+  };
 
   this.newBookInstance = function () {
     let [title, author, pages, read] = retrieveInputs();
