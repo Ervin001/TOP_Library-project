@@ -29,13 +29,10 @@ const Library = function () {
   };
 
   this.addAttribute = function () {
-    //   let cardDataEl = document.querySelectorAll('.card');
-    //   for (let i = 0; i < this.books.length; i++) {
-    //     cardDataEl[i].dataset.id = `${i}`;
-    //   }
-    // };
-    //   const elPosition = this.parentElement.dataset.id;
-    //   const indexedPosition = library.books.indexOf(library.books[elPosition]);
+    let cardDataEl = document.querySelectorAll('.card');
+    for (let i = 0; i < this.books.length; i++) {
+      cardDataEl[i].dataset.id = `${i}`;
+    }
   };
 
   this.newBookInstance = function () {
@@ -45,13 +42,17 @@ const Library = function () {
   };
 
   this.clearInputData = function () {};
-  this.deleteBook = function () {};
+  this.deleteBook = function () {
+    //   const elPosition = this.parentElement.dataset.id;
+    //   const indexedPosition = library.books.indexOf(library.books[elPosition]);
+  };
   this.deleteAllBooks = function () {};
   this.clearDisplay = function (parent) {
     while (parent.firstChild) {
       parent.removeChild(parent.firstChild);
     }
   };
+
   this.updateDisplay = function (array) {
     array.forEach((e) => {
       const card = `
@@ -95,6 +96,7 @@ formSubmitEl.addEventListener('click', (e) => {
     if (library.books.length > 0) library.clearDisplay(containerEl);
     library.updateDisplay(library.books);
     library.persistBook();
+    library.addAttribute();
   }
 });
 
@@ -104,6 +106,7 @@ function init() {
     library.books = JSON.parse(storage);
   }
   library.updateDisplay(library.books);
+  library.addAttribute();
 }
 
 init();
