@@ -45,16 +45,18 @@ const Library = function () {
   this.deleteBook = function () {
     const cardsEl = document.querySelectorAll('.card');
     const trashEl = document.querySelectorAll('.trash');
-    console.log(trashEl);
+
     // const elPosition = this.parentElement.dataset.id;
     // const indexedPosition = library.books.indexOf(library.books[elPosition]);
 
     // cardsEl.forEach((e) => console.log(e.dataset.id));
     cardsEl.forEach((card, i) =>
-      card.addEventListener('click', (e) => {
-        console.log(e.target);
-        console.log(trashEl[i].className);
-        // if (e.target === trashEl[i].className)
+      // console.log(card.classList.contains('.trash'))
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('.trash') !== null) {
+          // deletes the appropriate card
+          e.target.closest('.card').remove();
+        }
       })
     );
   };
@@ -120,6 +122,7 @@ function init() {
   }
   library.updateDisplay(library.books);
   library.addAttribute();
+  library.deleteBook();
 }
 
 init();
