@@ -19,6 +19,7 @@ function Book(title, author, pages, read) {
 
 const Library = function () {
   this.books = [];
+
   this.addBookToLibrary = function () {
     this.books.push(this.newBookInstance());
   };
@@ -41,26 +42,27 @@ const Library = function () {
     return new Book(title, author, pages, read);
   };
 
-  this.clearInputData = function () {};
+  this.clearInputData = function () {
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+  };
+
   this.deleteBook = function () {
     const cardsEl = document.querySelectorAll('.card');
-    const trashEl = document.querySelectorAll('.trash');
 
-    // const elPosition = this.parentElement.dataset.id;
-    // const indexedPosition = library.books.indexOf(library.books[elPosition]);
-
-    // cardsEl.forEach((e) => console.log(e.dataset.id));
     cardsEl.forEach((card, i) =>
-      // console.log(card.classList.contains('.trash'))
       card.addEventListener('click', function (e) {
         if (e.target.closest('.trash') !== null) {
-          // deletes the appropriate card
+          // deletes the selected card
           e.target.closest('.card').remove();
         }
       })
     );
   };
+
   this.deleteAllBooks = function () {};
+
   this.clearDisplay = function (parent) {
     while (parent.firstChild) {
       parent.removeChild(parent.firstChild);
@@ -102,6 +104,7 @@ const retrieveInputs = function () {
   return [title.value, author.value, pages.value, read.checked];
 };
 
+// Submit form
 formSubmitEl.addEventListener('click', (e) => {
   e.preventDefault();
 
@@ -109,12 +112,13 @@ formSubmitEl.addEventListener('click', (e) => {
     library.addBookToLibrary();
     if (library.books.length > 0) library.clearDisplay(containerEl);
     library.updateDisplay(library.books);
-    library.persistBook();
     library.addAttribute();
-    library.deleteBook();
+    // library.deleteBook();
+    library.clearInputData();
   }
 });
 
+// Delete button
 function init() {
   const storage = localStorage.getItem('books');
   if (storage) {
@@ -122,7 +126,18 @@ function init() {
   }
   library.updateDisplay(library.books);
   library.addAttribute();
-  library.deleteBook();
+  // library.deleteBook();
 }
 
 init();
+
+const cardsEl = document.querySelectorAll('.card');
+
+cardsEl.forEach((card, i) =>
+  card.addEventListener('click', function (e) {
+    if (e.target.closest('.trash') !== null) {
+      // deletes the selected card
+      e.target.closest('.card').remove();
+    }
+  })
+);
