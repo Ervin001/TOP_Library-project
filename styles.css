@@ -87,6 +87,10 @@ input {
   align-items: center;
 }
 
+#read-status {
+  align-self: center;
+}
+
 .fourth-input > input {
   align-self: stretch;
   margin-left: 5px;
@@ -156,4 +160,7 @@ input {
 
 .trash {
   margin-top: 10px;
+}
+.trash:hover {
+  cursor: pointer;
 }
