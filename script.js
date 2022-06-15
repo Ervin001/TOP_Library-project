@@ -134,28 +134,3 @@ function init() {
 }
 
 init();
-<<<<<<< HEAD
-
-const trashEl = document.querySelectorAll('.trash');
-trashEl.forEach((trash) =>
-  trash.addEventListener('click', function (e) {
-    const target = e.target;
-
-    if (library.books.length === 1) {
-      this.parentNode.remove();
-    }
-    const elPosition = this.parentElement.dataset.id;
-
-    const indexedPosition = library.books.indexOf(library.books[elPosition]);
-
-    library.books.splice(indexedPosition, 1);
-    console.log(indexedPosition);
-    // e.stopPropagation();
-
-    if (this.classList.contains('trash')) {
-      this.parentNode.remove();
-    }
-  })
-);
-=======
->>>>>>> newJsLogic
