@@ -24,8 +24,8 @@ const Library = function () {
     this.books.push(this.newBookInstance());
   };
 
+  // Adds books to localStorage
   this.persistBook = function (book) {
-    // Adds books to localStorage
     localStorage.setItem('books', JSON.stringify(library.books));
   };
 
@@ -46,21 +46,10 @@ const Library = function () {
     title.value = '';
     author.value = '';
     pages.value = '';
+    read.checked = false;
   };
 
-  this.deleteBook = function () {
-    const cardsEl = document.querySelectorAll('.card');
-
-    cardsEl.forEach((card, i) =>
-      card.addEventListener('click', function (e) {
-        if (e.target.closest('.trash') !== null) {
-          // deletes the selected card
-          e.target.closest('.card').remove();
-        }
-      })
-    );
-  };
-
+  // curr doesn't exist
   this.deleteAllBooks = function () {};
 
   this.clearDisplay = function (parent) {
@@ -96,6 +85,18 @@ const Library = function () {
       containerEl.insertAdjacentHTML('beforeend', card);
     });
   };
+
+  this.deleteBook = function (e) {
+    const datasetNumber = +e.target.closest('.card').dataset.id;
+    if (e.target.closest('.trash') !== null) {
+      // Remove card from DOM
+      e.target.closest('.card').remove();
+
+      // Removes card from books array
+      const indexPosition = library.books.indexOf(library.books[datasetNumber]);
+      library.books.splice(indexPosition, 1);
+    }
+  };
 };
 
 const library = new Library();
@@ -110,15 +111,19 @@ formSubmitEl.addEventListener('click', (e) => {
 
   if (title.value !== '' && author.value !== '' && pages.value !== '') {
     library.addBookToLibrary();
-    if (library.books.length > 0) library.clearDisplay(containerEl);
+    library.clearDisplay(containerEl);
     library.updateDisplay(library.books);
     library.addAttribute();
     // library.deleteBook();
     library.clearInputData();
+
+    const cardsEl = document.querySelectorAll('.card');
+    cardsEl.forEach((card, i) =>
+      card.addEventListener('click', library.deleteBook)
+    );
   }
 });
 
-// Delete button
 function init() {
   const storage = localStorage.getItem('books');
   if (storage) {
@@ -126,18 +131,6 @@ function init() {
   }
   library.updateDisplay(library.books);
   library.addAttribute();
-  // library.deleteBook();
 }
 
 init();
-
-const cardsEl = document.querySelectorAll('.card');
-
-cardsEl.forEach((card, i) =>
-  card.addEventListener('click', function (e) {
-    if (e.target.closest('.trash') !== null) {
-      // deletes the selected card
-      e.target.closest('.card').remove();
-    }
-  })
-);
